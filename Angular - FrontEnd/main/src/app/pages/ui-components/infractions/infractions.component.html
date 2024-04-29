@@ -1,0 +1,128 @@
+<mat-card class="cardWithShadow theme-card">
+  <mat-card-header class="d-flex justify-content-between">
+    <mat-card-title class="m-b-0">Infractions</mat-card-title>
+      <button mat-raised-button  color="accent" (click)="openAddDialog()" >
+          <span>Add Infraction</span>  
+          <mat-icon>add</mat-icon>
+      </button>  
+    
+  </mat-card-header>
+    <mat-card-content class="b-t-1">
+        <div class="table-responsive m-t-16">
+            <table mat-table class="mat-elevation-z8" [dataSource]="infractions">
+                <!-- ID Column -->
+                <ng-container matColumnDef="id">
+                  <th mat-header-cell *matHeaderCellDef>ID</th>
+                  <td mat-cell *matCellDef="let element">{{element.id}}</td>
+                </ng-container>
+              
+                <!-- Date Column -->
+                <ng-container matColumnDef="date">
+                  <th mat-header-cell *matHeaderCellDef>Date</th>
+                  <td mat-cell *matCellDef="let element">{{element.date | date: 'yyyy-MM-dd HH:mm:ss'}} </td>
+                </ng-container>
+
+                <!-- vehicle Speed Column -->
+                <ng-container matColumnDef="vehiculeMatricule">
+                    <th mat-header-cell *matHeaderCellDef>Matricul</th>
+                    <td mat-cell *matCellDef="let element">{{element.numMatricule}} </td>
+                  </ng-container>
+
+                <!-- vehicle Speed Column -->
+                <ng-container matColumnDef="vehicleSpeed">
+                    <th mat-header-cell *matHeaderCellDef>vehicle Speed</th>
+                    <td mat-cell *matCellDef="let element">{{element.vitesseVehicule| number: '1.2-2'}} </td>
+                  </ng-container>
+              
+                <!-- Radar Max Column -->
+                <ng-container matColumnDef="radarMaxSpeed">
+                  <th mat-header-cell *matHeaderCellDef>Radar Number</th>
+                  <td mat-cell *matCellDef="let element">{{element.numRadar}}</td>
+                </ng-container>
+                <!-- Fine Ammount Column -->
+                <ng-container matColumnDef="fineAmount">
+                    <th mat-header-cell *matHeaderCellDef>Fine Ammount</th>
+                    <td mat-cell *matCellDef="let element">{{element.montantFraction | number: '1.2-2'}}</td>
+                  </ng-container>
+              
+                <!-- Consult Button Column -->
+                <ng-container matColumnDef="consult">
+                  <th mat-header-cell *matHeaderCellDef></th>
+                  <td mat-cell *matCellDef="let element">
+                    <button  mat-flat-button color="primary" >
+                        <span>Consult</span>
+                        <mat-icon>search</mat-icon>
+                    </button>
+                  </td>
+                </ng-container>
+              
+                <!-- Delete Button Column -->
+                <ng-container matColumnDef="delete">
+                  <th mat-header-cell *matHeaderCellDef></th>
+                  <td mat-cell *matCellDef="let element">
+                    <button mat-flat-button color="warn" >
+                      <span>Delete</span>  
+                      <mat-icon>delete</mat-icon>
+                    </button>
+                  </td>
+                </ng-container>
+              
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>
+          </div>
+  
+  
+  
+    </mat-card-content>
+  </mat-card>
+  <ng-template #addInfractionDialog>
+    <h2 mat-dialog-title>Add Infraction</h2>
+<mat-dialog-content class="mat-typography">
+    <form class="example-form" [formGroup]="newInfractionForm" (ngSubmit)="saveNewInfraction()">
+        <div class="row m-t-24 custom-row">
+            <div class="col-sm-4">
+                <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">Vehicle Speed</mat-label>
+              <mat-form-field appearance="outline" class="w-100" color="primary" >
+                <input matInput class="form-control" id="vehicleSpeed" formControlName="vehicleSpeed" /> 
+              </mat-form-field>  
+            </div>
+            <div class="col-sm-4">
+              <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">Matricul</mat-label>
+            <mat-form-field appearance="outline" class="w-100" color="primary" >
+              <input matInput class="form-control" id="matricul" formControlName="matricul" /> 
+            </mat-form-field>  
+          </div>
+            <div class="col-sm-4">
+              <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">Infraction's Date</mat-label>
+              <mat-form-field appearance="outline" class="w-100" color="primary">
+                <input matInput [matDatepicker]="picker" placeholder="Choose a date" formControlName="dateInfraction">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+            </div>
+        </div> 
+        <div class="row m-t-24 custom-row">
+          <div class=" col-sm-6">
+        <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">Radar</mat-label>
+        <mat-form-field appearance="outline" class="w-100" color="primary" >
+                <input matInput class="form-control" id="radar" formControlName="radar" /> 
+        </mat-form-field>  
+          </div>
+          <div class="col-sm-6">
+            <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">Fine</mat-label>
+            <mat-form-field appearance="outline" class="w-100" color="primary" >
+                    <input matInput class="form-control" id="ammountFine" formControlName="ammountFine" /> 
+            </mat-form-field>  
+              </div>
+        </div>
+
+           
+</form>    
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-raised-button  color="warn" mat-dialog-close>Cancel</button>
+  <button mat-raised-button  color="primary" [mat-dialog-close]="true" cdkFocusInitial (click)="saveNewInfraction()">Add Vehicle</button>
+</mat-dialog-actions>
+
+  </ng-template>  

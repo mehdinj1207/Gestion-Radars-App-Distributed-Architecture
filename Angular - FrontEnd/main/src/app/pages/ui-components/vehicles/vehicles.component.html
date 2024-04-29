@@ -1,0 +1,84 @@
+<mat-card class="cardWithShadow theme-card">
+    <mat-card-header class="d-flex justify-content-between">
+      <mat-card-title class="m-b-0">Vehicles</mat-card-title>
+        <button mat-raised-button  color="accent" (click)="openDialog()">
+            <span>Add Vehicle</span>  
+            <mat-icon>add</mat-icon>
+        </button>  
+      
+    </mat-card-header>
+    <mat-card-content class="b-t-1">
+        <div class="table-responsive m-t-16">
+            <table mat-table class="mat-elevation-z8" [dataSource]="vehicles">
+                <!-- ID Column -->
+                <ng-container matColumnDef="id">
+                  <th mat-header-cell *matHeaderCellDef>ID</th>
+                  <td mat-cell *matCellDef="let element">{{element.id}}</td>
+                </ng-container>
+              
+                <!-- Date Column -->
+                <ng-container matColumnDef="brand">
+                  <th mat-header-cell *matHeaderCellDef>Brand</th>
+                  <td mat-cell *matCellDef="let element">{{element.marque}} </td>
+                </ng-container>
+
+                <!-- vehicle Speed Column -->
+                <ng-container matColumnDef="model">
+                    <th mat-header-cell *matHeaderCellDef>Model</th>
+                    <td mat-cell *matCellDef="let element">{{element.modele}} </td>
+                  </ng-container>
+
+                <!-- vehicle Speed Column -->
+                <ng-container matColumnDef="matricul">
+                    <th mat-header-cell *matHeaderCellDef>Matricul</th>
+                    <td mat-cell *matCellDef="let element">{{element.numMatricule}} </td>
+                  </ng-container>
+              
+                <!-- Radar Max Column -->
+                <ng-container matColumnDef="fiscalPower">
+                  <th mat-header-cell *matHeaderCellDef>Fiscal Power</th>
+                  <td mat-cell *matCellDef="let element">{{element.puissanceFiscale}}</td>
+                </ng-container>
+              
+                <!-- Consult Button Column -->
+                <ng-container matColumnDef="consult">
+                  <th mat-header-cell *matHeaderCellDef></th>
+                  <td mat-cell *matCellDef="let element">
+                    <button  mat-flat-button color="primary" >
+                        <span>Consult</span>
+                        <mat-icon>information</mat-icon>
+                    </button>
+                  </td>
+                </ng-container>
+              
+                <!-- Delete Button Column -->
+                <ng-container matColumnDef="delete">
+                  <th mat-header-cell *matHeaderCellDef></th>
+                  <td mat-cell *matCellDef="let element">
+                    <button mat-flat-button color="warn" (click)="openDeleteDialog(element.id)">
+                      <span>Delete</span>  
+                      <mat-icon>delete</mat-icon>
+                    </button>
+                  </td>
+                </ng-container>
+              
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>
+          </div>
+  
+  
+  
+    </mat-card-content>
+  </mat-card>
+  <ng-template #deleteOwnerDialog>
+    <!-- Delete Owner Dialog content -->
+    <h2 mat-dialog-title>Delete Vehicle</h2>
+    <mat-dialog-content>
+      <p>Are you sure you want to delete this vehicle?</p>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+      <button mat-button mat-dialog-close>No</button>
+      <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Yes</button>
+    </mat-dialog-actions>
+  </ng-template>

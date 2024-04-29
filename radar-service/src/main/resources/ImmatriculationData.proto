@@ -1,0 +1,111 @@
+syntax="proto3";
+option java_package="net.njema.immatriculationservice.grpc.stub";
+service ImmatriculationData{
+  rpc getAllProprietaires(GetAllProprietairesRequest) returns (GetAllProprietairesResponse);
+  rpc getProprietaireById(GetProprietaireByIdRequest) returns (GetProprietaireByIdResponse);
+  rpc getProprietaireByVehiculeId(GetProprietaireByVehiculeIdRequest) returns (GetProprietaireByVehiculeIdReponse);
+  rpc saveProprietaire(SaveProprietaireRequest) returns (SaveProprietaireResponse);
+  rpc updateProprietaire(UpdateProprietaireRequest) returns(UpdateProprietaireResponse);
+  rpc DeleteProprietaire(DeleteProprietaireRequest) returns (DeleteProprietaireResponse);
+  rpc getAllVehicules(GetAllVehiculesRequest) returns (GetAllVehiculesResponse);
+  rpc getVehiculeById(GetVehiculeByIdRequest) returns (GetVehiculeByIdResponse);
+  rpc saveVehicule(SaveVehiculeRequest) returns (SaveVehiculeResponse);
+  rpc updateVehicule(UpdateVehiculeRequest) returns(UpdateVehiculeResponse);
+  rpc DeleteVehicule(DeleteVehiculeRequest) returns (DeleteVehiculeResponse);
+}
+message proprietaire{
+  int64 id=1;
+  string nom=2;
+  string dateNaissance=3;
+  string email=4;
+}
+message vehicule{
+  int64 id=1;
+  string marque=2;
+  string modele=3;
+  string numMatricule=4;
+  string puissanceFiscale=5;
+  proprietaire proprietaire=6;
+}
+
+message GetAllProprietairesRequest{};
+
+message GetAllProprietairesResponse{
+  repeated proprietaire proprietaire=1;
+}
+
+message GetProprietaireByVehiculeIdRequest{
+  int64 id=1;
+}
+message GetProprietaireByVehiculeIdReponse{
+  proprietaire proprietaire=1;
+}
+
+message GetProprietaireByIdRequest{
+  int64 id=1;
+}
+
+message GetProprietaireByIdResponse{
+  proprietaire proprietaire=1;
+}
+
+message SaveProprietaireRequest{
+  proprietaire proprietaire=1;
+}
+
+message SaveProprietaireResponse{
+  proprietaire proprietaire=1;
+}
+
+message UpdateProprietaireRequest{
+  int64 id=1;
+  proprietaire proprietaire=2;
+}
+
+message UpdateProprietaireResponse{
+  proprietaire proprietaire=1;
+}
+
+message DeleteProprietaireRequest{
+  int64 id=1;
+}
+
+message DeleteProprietaireResponse{}
+
+message GetAllVehiculesRequest{};
+
+message GetAllVehiculesResponse{
+  repeated vehicule vehicules=1;
+}
+
+message GetVehiculeByIdRequest{
+  int64 id=1;
+}
+
+message GetVehiculeByIdResponse{
+  vehicule vehicule=1;
+}
+
+message SaveVehiculeRequest{
+  vehicule vehicule=1;
+}
+
+message SaveVehiculeResponse{
+  vehicule vehicule=1;
+}
+
+message UpdateVehiculeRequest{
+  int64 id=1;
+  vehicule vehicule=2;
+}
+
+message UpdateVehiculeResponse{
+  vehicule vehicule=1;
+}
+
+message DeleteVehiculeRequest{
+  int64 id=1;
+}
+
+message DeleteVehiculeResponse{}
+

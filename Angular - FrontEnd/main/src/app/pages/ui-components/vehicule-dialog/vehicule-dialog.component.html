@@ -1,0 +1,62 @@
+<h2 mat-dialog-title>Add Vehicule</h2>
+<mat-dialog-content class="mat-typography">
+    <form class="example-form" [formGroup]="newVehicleForm" (ngSubmit)="saveNewVehicle()">
+        <div class="row m-t-24 custom-row">
+            <div class="col-12 col-sm-6">
+                <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block"
+                >Name</mat-label>
+              <mat-form-field appearance="outline" class="w-100" color="primary" >
+                <input matInput class="form-control" id="ownerName" formControlName="ownerName" /> 
+              </mat-form-field>  
+            </div>
+            <div class="col-12 col-sm-6">
+              <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">Birth Date</mat-label>
+              <mat-form-field appearance="outline" class="w-100" color="primary">
+                <input matInput [matDatepicker]="picker" placeholder="Choose a date" formControlName="ownerBirthdate">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+            </div>
+        </div> 
+            
+        <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">Email</mat-label>
+        <mat-form-field appearance="outline" class="w-100" color="primary" >
+                <input matInput class="form-control" id="email1" formControlName="ownerEmail" /> 
+        </mat-form-field>  
+        <div class="row m-t-24 custom-row">
+            <div class=" col-sm-3">
+                <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block"
+                >Brand</mat-label>
+              <mat-form-field appearance="outline" class="w-100" color="primary"  >
+                <input matInput class="form-control" id="brand" formControlName="brand" /> 
+              </mat-form-field>  
+            </div>
+            <div class=" col-sm-3">
+                <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block"
+                >Model</mat-label>
+              <mat-form-field appearance="outline" class="w-100" color="primary">
+                <input matInput class="form-control" id="model" formControlName="model" /> 
+              </mat-form-field>  
+            </div>
+            <div class=" col-sm-3">
+                <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block"
+                 >Matricul</mat-label>
+              <mat-form-field appearance="outline" class="w-100" color="primary">
+                <input matInput class="form-control" id="regNumber" formControlName="regNumber"/> 
+              </mat-form-field>  
+            </div>
+            <div class=" col-sm-3">
+                <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block"
+                 >Fiscal Power</mat-label>
+              <mat-form-field appearance="outline" class="w-100" color="primary">
+                <input matInput class="form-control" id="fiscalPower" formControlName="fiscalPower"/> 
+              </mat-form-field>  
+            </div>
+        </div> 
+           
+</form>    
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-raised-button  color="warn" mat-dialog-close>Cancel</button>
+  <button mat-raised-button  color="primary" [mat-dialog-close]="true" cdkFocusInitial (click)="saveNewVehicle()">Add Vehicle</button>
+</mat-dialog-actions>
